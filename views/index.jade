@@ -1,0 +1,65 @@
+extends layout
+
+block content
+  h1.text-center Shopping Cart
+  button#addLink.btn.btn-success Add Item
+  //- br
+  //- a(href='/products') See All Products
+  div
+    table.table
+      thead
+        tr 
+          th Products
+          th Description
+          th Price
+          th Qty
+          th Edit 
+          th Delete 
+      tbody#tableBody
+        each item in items
+          tr(data-_id='#{item._id}')
+            td#nameTd #{item.name}
+            td#descTd #{item.description}
+            td#priceTd #{item.price}
+            td#qtyTd #{item.quantity}
+            td
+              a.edit Edit
+            td
+              a.delete Delete
+              
+  span Total: #{total}        
+    //- h3 #{total}
+
+  #myModal.modal.fade(role='dialog')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Add To List
+          .modal-body
+            form#newItem
+              .row
+                .col-xs-12
+                  .input-group
+                    span.input-group-addon Name
+                    input#nameInput.form-control(type='text', required='')
+              br
+              .row
+                .col-xs-12
+                  .input-group
+                    span.input-group-addon Description
+                    input#descInput.form-control(type='text', required='')
+              br        
+              .row
+                .col-xs-6
+                  .input-group
+                    span.input-group-addon Price
+                    input#priceInput.form-control(type='number')
+                .col-xs-6
+                  .input-group
+                    span.input-group-addon Qty
+                    input#qtyInput.form-control(type='number')
+          .modal-footer
+            button#saveButton.btn.btn-success Save
+  
+
