@@ -84,9 +84,12 @@ function drawTable() {
     $('#tableBody').empty();
      var trArray = [];
      data.map(function(item){
+      var intPrice = parseInt(item.price);
+      var formattedPrice = formatNum(intPrice);
+
       var $nameTd = $('<td>').text(item.name);
       var $descTd = $('<td>').text(item.description);
-      var $priceTd = $('<td>').text(item.price);
+      var $priceTd = $('<td>').text(formattedPrice);
       var $qtyTd = $('<td>').text(item.quantity);
       var $editTd = $('<td>').append($('<a>').addClass('edit').text('Edit'));
       var $removeTd = $('<td>').append($('<a>').addClass('delete').text('Delete'));
@@ -94,7 +97,21 @@ function drawTable() {
       trArray.push($tr);
      })
      $('#tableBody').append(trArray);
+
+     var total = data.reduce(function(prev, curr) {
+      return prev + curr.price;
+    },0).toFixed(2);
+
+     $('#spanTotal').text('Total: $'+total);
+
   })
+}
+
+
+
+function formatNum(num){
+  var intNum = parseInt(num).toFixed([2]).toString();
+  return "$"+intNum.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 }
 
 function deleteItem(){

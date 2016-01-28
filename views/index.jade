@@ -20,14 +20,14 @@ block content
           tr(data-_id='#{item._id}')
             td#nameTd #{item.name}
             td#descTd #{item.description}
-            td#priceTd #{item.price}
+            td#priceTd $#{item.price}
             td#qtyTd #{item.quantity}
             td
               a.edit Edit
             td
               a.delete Delete
               
-  span Total: #{total}        
+  span#totalSpan Total: $#{total}        
     //- h3 #{total}
 
   #myModal.modal.fade(role='dialog')
